@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { hasSupabaseConfig, supabase } from "../lib/supabase";
+import { supabase } from "../lib/supabase";
 
 interface Props {
   onSuccess?: () => void;
@@ -53,11 +53,6 @@ export default function CompanyForm({ onSuccess }: Props) {
       onSubmit={handleSubmit}
       className="mx-auto flex w-full max-w-xl flex-col gap-3 rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
     >
-      {!hasSupabaseConfig && (
-        <p className="rounded-md bg-amber-50 p-2 text-sm text-amber-900">
-          Configure o Supabase no <code>.env</code> para salvar os dados.
-        </p>
-      )}
 
       <input
         value={name}
@@ -90,7 +85,7 @@ export default function CompanyForm({ onSuccess }: Props) {
 
       <button
         type="submit"
-        disabled={loading || !hasSupabaseConfig}
+        disabled={loading}
         className="rounded-md bg-emerald-600 px-4 py-2 font-medium text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-slate-400"
       >
         {loading ? "Salvando..." : "Cadastrar"}

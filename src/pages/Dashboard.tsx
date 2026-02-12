@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { hasSupabaseConfig, supabase } from "../lib/supabase";
+import { supabase } from "../lib/supabase";
 
 interface Company {
   id: string;
@@ -29,13 +29,6 @@ export default function Dashboard() {
   return (
     <div className="mx-auto max-w-4xl p-8">
       <h1 className="mb-6 text-3xl font-bold text-slate-900">Empresas cadastradas</h1>
-
-      {!hasSupabaseConfig && (
-        <div className="mb-6 rounded-lg border border-amber-300 bg-amber-50 p-4 text-amber-900">
-          Configure <code>VITE_SUPABASE_URL</code> e <code>VITE_SUPABASE_ANON_KEY</code>
-          no arquivo <code>.env</code> para carregar os dados.
-        </div>
-      )}
 
       <div className="space-y-4">
         {companies.map((company) => (
