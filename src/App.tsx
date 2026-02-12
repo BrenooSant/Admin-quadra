@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import CompanyForm from "./components/CompanyForm";
 import Login from "./pages/Login";
 import { supabase } from "./lib/supabase";
+import EditCompany from "./pages/EditCompany";
 
 const allowedEmails = import.meta.env.VITE_ALLOWED_ADMINS
   ?.split(",")
@@ -86,35 +87,42 @@ const isAuthenticated =
         )}
 
         <main>
-          <Routes>
-            <Route
-              path="/login"
-              element={
-                session ? <Navigate to="/" replace /> : <Login />
-              }
-            />
+         <Routes>
+  <Route
+    path="/login"
+    element={
+      session ? <Navigate to="/" replace /> : <Login />
+    }
+  />
 
-            <Route
-              path="/"
-              element={
-                isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />
-              }
-            />
+  <Route
+    path="/"
+    element={
+      isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />
+    }
+  />
 
-            <Route
-              path="/add"
-              element={
-                isAuthenticated ? <CompanyForm /> : <Navigate to="/login" replace />
-              }
-            />
+  <Route
+    path="/add"
+    element={
+      isAuthenticated ? <CompanyForm /> : <Navigate to="/login" replace />
+    }
+  />
 
-            <Route
-              path="*"
-              element={
-                <Navigate to={isAuthenticated ? "/" : "/login"} replace />
-              }
-            />
-          </Routes>
+  <Route
+    path="/edit/:id"
+    element={
+      isAuthenticated ? <EditCompany /> : <Navigate to="/login" replace />
+    }
+  />
+
+  <Route
+    path="*"
+    element={
+      <Navigate to={isAuthenticated ? "/" : "/login"} replace />
+    }
+  />
+</Routes>
         </main>
       </div>
     </BrowserRouter>
